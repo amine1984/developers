@@ -1,0 +1,111 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: ecoquelin
+      comment : "Creates table INFOS"
+      changes:
+        - createTable:
+            tableName: infos
+            columns:
+              - column:
+                  name: version
+                  type: varchar
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+  - changeSet:
+      id: 2
+      author: ecoquelin
+      comment : "Insert starting version"
+      changes:
+        - insert:
+            tableName: infos
+            columns:
+              - column:
+                  name: version
+                  value: "1"
+                  
+  - changeSet:
+      id: 3
+      author: amine
+      comment : "Create developer  table"
+      changes:
+        - createTable:
+            tableName: developer
+            columns:
+              - column:
+                  name: id
+                  type: INTEGER AUTO_INCREMENT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: VARCHAR
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: VARCHAR
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 4
+      author: amine
+      comment : "Create language  table"
+      changes:
+        - createTable:
+            tableName: language
+            columns:
+              - column:
+                  name: id
+                  type: INTEGER AUTO_INCREMENT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR
+                  constraints:
+                    nullable: false
+              - column:
+                  name: version
+                  type: VARCHAR
+                  constraints:
+                    nullable: false
+  
+          
+  - changeSet:
+      id: 5
+      author: amine
+      comment : "Create developer_language  table"
+      changes:
+        - createTable:
+            tableName: developer_language
+            columns:
+              - column:
+                  name: developer_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: language_id
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames: developer_id
+            baseTableName: developer_language
+            constraintName: fk_developer_id
+            referencedColumnNames: id
+            referencedTableName: developer
+        - addForeignKeyConstraint:
+            baseColumnNames: language_id
+            baseTableName: developer_language
+            constraintName: fk_language_id
+            referencedColumnNames: id
+            referencedTableName: language
+    
+
+                  
