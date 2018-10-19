@@ -1,6 +1,6 @@
 package com.jcdecaux.recruiting.developpers.domain.repository;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -15,6 +15,6 @@ public interface IdevelopersRepository extends JpaRepository<DeveloperEntity, In
 	DeveloperEntity findById(Integer id);
 	
 	@Query("select developer from DeveloperEntity developer join developer.languages language where language.name=:language")
-	List<DeveloperEntity> findByLanguage(@Param("language") String language);
+	Set<DeveloperEntity> findByLanguage(@Param("language") String language);
 
 }

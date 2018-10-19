@@ -7,9 +7,11 @@ import javax.ws.rs.core.Response.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import com.jcdecaux.recruiting.developpers.domain.service.IdevelopersService;
 import com.jcdecaux.recruiting.developpers.domain.service.exceptions.ServiceException;
+import com.jcdecaux.recruiting.developpers.service.rest.FunctionalException;
 import com.jcdecaux.recruiting.developpers.service.rest.IdevelopersResource;
 import com.jcdecaux.recruiting.developpers.service.rest.dto.DeveloperDTO;
 
@@ -21,7 +23,7 @@ public class DevelopersResourceImpl implements IdevelopersResource{
 	
 	@Override
 	public Response createDevelopers(List<DeveloperDTO> developers) {
-		if (developers == null) {
+		if (CollectionUtils.isEmpty(developers)) {
 			return Response.status(Status.BAD_REQUEST).build();
 		}
 		return Response.ok(developersService.createDevelopers(developers)).build();
@@ -29,7 +31,12 @@ public class DevelopersResourceImpl implements IdevelopersResource{
 
 	@Override
 	public Response updateDevelopers(Integer id, DeveloperDTO developer) {
-		return Response.ok(developersService.updateDevelopers(id, developer)).build();
+		try {
+			return Response.ok(developersService.updateDevelopers(id, developer)).build();
+		} catch (ServiceException e) {
+			 throw new FunctionalException(e.getMessage(),Status.BAD_REQUEST);
+		}
+		
 	}
 
 	@Override
@@ -37,7 +44,8 @@ public class DevelopersResourceImpl implements IdevelopersResource{
 		if(languageName==null){
 			return Response.status(Status.BAD_REQUEST).build();
 		}
-		return Response.ok(developersService.getDevelopers(languageName)).build();
+		return developersService.getDevelopers(languageName).map(result -> Response.ok(result).build())
+								.orElse(Response.noContent().build());
 	}
 
 	@Override
@@ -45,7 +53,7 @@ public class DevelopersResourceImpl implements IdevelopersResource{
 		try {
 			developersService.associateLanguages(idDeveloper, languageName,langugageVersion);	
 		} catch (ServiceException e) {
-			return Response.status(Status.BAD_REQUEST).build();
+			throw new FunctionalException(e.getMessage(),Status.BAD_REQUEST);
 		}
 		
 		return Response.ok().build();

@@ -1,6 +1,7 @@
 package com.jcdecaux.recruiting.developpers.domain.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ public interface IdevelopersService {
 	
 	public int updateDevelopers(int developerId , DeveloperDTO developer);
 	
-	public List<DeveloperDTO> getDevelopers(String langugeName);
+	public Optional<List<DeveloperDTO>> getDevelopers(String langugeName);
 	
 	public void associateLanguages(Integer idDeveloper, String languageName, String languageVersion);	
 	

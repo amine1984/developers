@@ -2,6 +2,7 @@ package com.jcdecaux.recruiting.developpers.domain.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,11 +59,12 @@ public class DevelopersServiceImpl implements IdevelopersService{
 			developerRepository.save(developerEntity);
 		}else throw new ServiceException(ASSOCIATE_BAD_PARAMETRES_MESSAGE);
 	}
-
+	
 
 	@Override
-	public List<DeveloperDTO> getDevelopers(String languageName) {
-		return developerRepository.findByLanguage(languageName).stream().map(this::mapToDeveloperDTO).collect(Collectors.toList());
+	public Optional<List<DeveloperDTO>> getDevelopers(String languageName) {
+		return Optional.of(developerRepository.findByLanguage(languageName).stream().map(this::mapToDeveloperDTO)
+						.collect(Collectors.toList()));
 	}
 	
 	private DeveloperDTO mapToDeveloperDTO(DeveloperEntity developerEntity){
