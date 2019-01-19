@@ -1,21 +1,23 @@
 package com.jcdecaux.recruiting.developpers.domain.service;
 
-import java.util.List;
-
+import com.jcdecaux.recruiting.developpers.service.rest.dto.DeveloperDTO;
 import org.springframework.stereotype.Service;
 
-import com.jcdecaux.recruiting.developpers.service.rest.dto.DeveloperDTO;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public interface IdevelopersService {
 	
-	public List<DeveloperDTO> createDevelopers(List<DeveloperDTO> developers);
-	
-	public int updateDevelopers(int developerId , DeveloperDTO developer);
-	
-	public List<DeveloperDTO> getDevelopers(String langugeName);
-	
-	public void associateLanguages(Integer idDeveloper, String languageName, String languageVersion);	
-	
+	 List<Integer> createDevelopers(List<DeveloperDTO> developers);
+
+	 int updateDevelopers(int developerId , DeveloperDTO developer);
+
+	 List<DeveloperDTO> getDevelopers(String langugeName);
+
+	 void associateLanguages(Integer idDeveloper, String languageName, String languageVersion);
+
+	 Optional<DeveloperDTO> viewDeveloper(Integer idDeveloper);
+
 
 }

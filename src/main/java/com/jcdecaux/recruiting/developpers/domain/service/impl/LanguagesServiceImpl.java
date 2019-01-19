@@ -1,5 +1,6 @@
 package com.jcdecaux.recruiting.developpers.domain.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,22 +19,29 @@ public class LanguagesServiceImpl implements IlanguagesService{
 	private IlanguagesRepository languagesRepository;
 
 	@Override
-	public List<LanguageDTO> createLanguages(List<LanguageDTO> languages) {
-		//We can use mapping framework to simplify like Selma or MapStruts
-		List<LanguageEntity> languagesEnity = languagesRepository.save(languages.stream().map(language -> {
-			LanguageEntity languageEntiry = new LanguageEntity();
-			languageEntiry.setName(language.getName());
-			languageEntiry.setVersion(language.getVersion());
-			return languageEntiry;
-		}).collect(Collectors.toList()));
-		
-		return languagesEnity.stream().map(language -> {
-			LanguageDTO languageDTO = new LanguageDTO();
-			languageDTO.setName(language.getName());
-			languageDTO.setVersion(language.getVersion());
-			return languageDTO;
-		}).collect(Collectors.toList());
-		
+	public List<Integer> createLanguages(List<LanguageDTO> languages) {
+		List<LanguageEntity> languagesEntity = languagesRepository.save(languages.stream().map(this::mapToLanguageEntity).collect(Collectors.toList()));
+		List<Integer> idLanguages = new ArrayList<>();
+		languagesEntity.forEach(languageEntity -> idLanguages.add(languageEntity.getId()));
+		return idLanguages;
+	}
+
+	@Override
+	public LanguageDTO viewLanguage(Integer idLanguage) {
+		return mapToLanguageDTO(languagesRepository.findById(idLanguage));
+	}
+
+	private LanguageEntity mapToLanguageEntity(LanguageDTO languageDTO){
+		LanguageEntity languageEntity = new LanguageEntity();
+		languageEntity.setName(languageDTO.getName());
+		languageEntity.setVersion(languageDTO.getVersion());
+		return languageEntity;
+	}
+	private LanguageDTO mapToLanguageDTO(LanguageEntity languageEntity){
+		LanguageDTO languageDTO = new LanguageDTO();
+		languageDTO.setName(languageEntity.getName());
+		languageDTO.setVersion(languageEntity.getVersion());
+		return languageDTO;
 	}
 
 }

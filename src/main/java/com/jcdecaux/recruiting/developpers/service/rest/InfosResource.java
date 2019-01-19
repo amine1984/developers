@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public interface InfosResource {
 
 	@GET
-	public String get();
+	String get();
 	
 
 }

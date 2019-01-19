@@ -1,5 +1,9 @@
 package com.jcdecaux.recruiting.developpers;
 
+import com.jcdecaux.recruiting.developpers.domain.service.impl.DevelopersServiceImpl;
+import com.jcdecaux.recruiting.developpers.domain.service.impl.LanguagesServiceImpl;
+import com.jcdecaux.recruiting.developpers.service.rest.impl.DevelopersResourceImpl;
+import com.jcdecaux.recruiting.developpers.service.rest.impl.LanguagesResourceImpl;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,11 +25,19 @@ public class ApplicationTest {
 	@Autowired
 	private IdevelopersResource developersResouce;
 	@Autowired
+	private DevelopersResourceImpl developersResourceImpl;
+	@Autowired
 	private IlanguagesResource languagesResource;
+	@Autowired
+	private LanguagesResourceImpl languagesResourceImpl;
 	@Autowired
 	private IdevelopersService developerService;
 	@Autowired
+	private DevelopersServiceImpl developersServiceImpl;
+	@Autowired
 	private IlanguagesService languagesService;
+	@Autowired
+	private LanguagesServiceImpl languagesServiceImpl;
 	@Autowired
 	private IdevelopersRepository developerRepository;
 	@Autowired
@@ -35,8 +47,12 @@ public class ApplicationTest {
 	public void test_contextLoads() {
 		Assert.assertNotNull(developersResouce.getClass());
 		Assert.assertNotNull(languagesResource.getClass());
+		Assert.assertNotNull(developersResourceImpl.getClass());
+		Assert.assertNotNull(languagesResourceImpl.getClass());
 		Assert.assertNotNull(developerService.getClass());
+		Assert.assertNotNull(developersServiceImpl.getClass());
 		Assert.assertNotNull(languagesService.getClass());
+		Assert.assertNotNull(languagesServiceImpl.getClass());
 		Assert.assertNotNull(developerRepository.getClass());
 		Assert.assertNotNull(languagesRepository.getClass());
 	}
