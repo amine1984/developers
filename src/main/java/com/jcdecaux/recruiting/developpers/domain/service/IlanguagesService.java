@@ -9,6 +9,7 @@ import com.jcdecaux.recruiting.developpers.service.rest.dto.LanguageDTO;
 @Service
 public interface IlanguagesService {
 	
-	public List<LanguageDTO> createLanguages(List<LanguageDTO> languages);
+	 List<Integer> createLanguages(List<LanguageDTO> languages);
+	 LanguageDTO viewLanguage (Integer idLanguage);
 
 }

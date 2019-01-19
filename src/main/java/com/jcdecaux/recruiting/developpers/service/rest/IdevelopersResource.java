@@ -23,25 +23,30 @@ public interface IdevelopersResource {
 	@POST
 	@Consumes("application/json")
 	@Produces("application/json")
-	public Response createDevelopers(List<DeveloperDTO> developers);
+	Response createDevelopers(List<DeveloperDTO> developers);
 		
 	@PUT
 	@Path("/{id}")
 	@Produces({ "application/json" })
 	@Consumes({ "application/json" })
-	public Response updateDevelopers(@PathParam("id") Integer id, DeveloperDTO developer);
+	Response updateDevelopers(@PathParam("id") Integer id, DeveloperDTO developer);
 	
 	
 	@PUT
 	@Path("{idDeveloper}/languages/{languageName}/{languageVersion}")
 	@Produces({ "application/json" })
-	public Response associateLanguages(@PathParam("idDeveloper") Integer idDeveloper,@PathParam("languageName") String languageName,
+	Response associateLanguages(@PathParam("idDeveloper") Integer idDeveloper,@PathParam("languageName") String languageName,
 									  @PathParam("languageVersion") String languageVersion);
 	
 	
 	@GET
 	@Path("/languages/")
 	@Produces({ "application/json" })
-	public Response getDevelopers(@QueryParam("languageName") String languageName);
+	Response getDevelopers(@QueryParam("languageName") String languageName);
+
+	@GET
+	@Path("/{idDeveloper}")
+	@Produces({ "application/json" })
+	Response viewDeveloper(@PathParam("idDeveloper") Integer idDeveloper);
 	
 }

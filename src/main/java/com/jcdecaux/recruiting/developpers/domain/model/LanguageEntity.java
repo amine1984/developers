@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Objects;
 
 @Entity
 @Table(name="LANGUAGE")
@@ -68,17 +69,9 @@ public class LanguageEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		LanguageEntity other = (LanguageEntity) obj;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (version == null) {
-			if (other.version != null)
-				return false;
-		} else if (!version.equals(other.version))
-			return false;
-		return true;
+		return id == other.id
+				&& Objects.equals(name,other.name)
+				&& Objects.equals(version,other.version);
 	}
 
 	

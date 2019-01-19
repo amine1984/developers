@@ -18,7 +18,7 @@ public class ServiceExceptionMapper implements ExceptionMapper<FunctionalExcepti
 
 		ErrorReponse errorReponse = new ErrorReponse(); 
 		errorReponse.setErrorCode(exception.getStatus().getStatusCode());
-		errorReponse.setErrorMessage(exception.getDescrption());
+		errorReponse.setErrorMessage(exception.getDescription());
 		return Response.status(exception.getStatus()).entity(errorReponse).build();
 	}
 

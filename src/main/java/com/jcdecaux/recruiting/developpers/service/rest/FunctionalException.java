@@ -8,42 +8,21 @@ public class FunctionalException extends RuntimeException{
 	 * 
 	 */
 	private static final long serialVersionUID = -6396797119658345586L;
-	
-	private String id;
-	private String descrption;
-	private Status status;
-	
-	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getDescrption() {
-		return descrption;
-	}
-	public void setDescrption(String descrption) {
-		this.descrption = descrption;
+
+	private final String description;
+	private final Status status;
+
+	public String getDescription() {
+		return description;
 	}
 	public Status getStatus() {
 		return status;
 	}
-	public void setStatus(Status status) {
-		this.status = status;
-	}
-	public FunctionalException(String id, String descrption, Status status) {
+	public FunctionalException(String description, Status status) {
 		super();
-		this.id = id;
-		this.descrption = descrption;
+		this.description = description;
 		this.status = status;
 	}
-	
-	public FunctionalException(String descrption, Status status) {
-		super();
-		this.descrption = descrption;
-		this.status = status;
-	}
-	
+
 
 }
