@@ -59,6 +59,16 @@ public class DevelopersResourceImpl implements IdevelopersResource{
 	}
 
 	@Override
+	public Response searchDevelopers(String developerName) {
+
+		List<DeveloperDTO> developers = developersService.searchDevelopers(developerName);
+
+		if (StringUtils.isEmpty(developers)){ return Response.noContent().build();}
+
+		return Response.ok(developersService.searchDevelopers(developerName)).build();
+	}
+
+	@Override
 	public Response getDevelopers(String languageName) {
 		if(StringUtils.isEmpty(languageName)){
 			

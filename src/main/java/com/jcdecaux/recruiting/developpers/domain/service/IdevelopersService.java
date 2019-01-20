@@ -19,5 +19,7 @@ public interface IdevelopersService {
 
 	 Optional<DeveloperDTO> viewDeveloper(Integer idDeveloper);
 
+	 List<DeveloperDTO> searchDevelopers (String developerName);
+
 
 }

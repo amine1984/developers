@@ -2,6 +2,7 @@ package com.jcdecaux.recruiting.developpers.domain.service.impl;
 
 import com.jcdecaux.recruiting.developpers.domain.model.DeveloperEntity;
 import com.jcdecaux.recruiting.developpers.domain.model.LanguageEntity;
+import com.jcdecaux.recruiting.developpers.domain.model.queries.DeveloperSpecification;
 import com.jcdecaux.recruiting.developpers.domain.repository.IdevelopersRepository;
 import com.jcdecaux.recruiting.developpers.domain.repository.IlanguagesRepository;
 import com.jcdecaux.recruiting.developpers.domain.service.IdevelopersService;
@@ -61,6 +62,11 @@ public class DevelopersServiceImpl implements IdevelopersService{
 	@Override
 	public Optional<DeveloperDTO> viewDeveloper(Integer idDeveloper) {
 		return Optional.ofNullable(mapToDeveloperDTO(developerRepository.findById(idDeveloper)));
+	}
+
+	@Override
+	public List<DeveloperDTO> searchDevelopers(String developerName) {
+		return  developerRepository.findAll(DeveloperSpecification.likeDeveloperName("firstName",developerName)).stream().map(this::mapToDeveloperDTO).collect(Collectors.toList());
 	}
 
 	@Override
